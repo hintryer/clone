@@ -33,21 +33,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 内置Token（API调用）
         run: |
           python gh_release_downloader.py
-
-      - name: 提交更新文件（普通推送）
-        run: |
-          git config --global user.name "软件更新机器人"
-          git config --global user.email "software-bot@github.com"
-
-          # 1. 检查文件大小（跳过超限文件）
-          find software/ -type f -size +100M -print0 | xargs -0 rm -f
-          echo "✅ 已清理超过100MB的文件"
-          
-          git add .
-          if git diff --cached --quiet; then
-              echo "ℹ️  无文件变更，跳过提交"
-              exit 0
-          fi
-          
-          git commit -m "更新时间: $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
-          git push origin main
