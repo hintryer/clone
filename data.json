@@ -1,5 +1,5 @@
 {
-  "repo": "Bush2021/chrome_installer",
+  "repo": "lalakii/MouseClickTool",
   "save_dir": "./downloads",
   "include_pattern": ".*\\.exe$",
   "include_pre_release": true
