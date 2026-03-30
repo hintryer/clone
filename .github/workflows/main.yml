@@ -49,5 +49,3 @@ jobs:
           
           git commit -m "更新时间: $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
           git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
