@@ -76,9 +76,9 @@ if __name__ == "__main__":
     os.makedirs(save_dir, exist_ok=True)
 
     releases = get_releases(repo)
-    print(releases)
+    
     latest = find_latest(releases, pre)
-    print(releases)
+    print(latest)
     if not latest:
         print("无版本")
         exit(1)
