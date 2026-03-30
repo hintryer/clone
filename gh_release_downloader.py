@@ -6,14 +6,38 @@ import requests
 CONFIG_FILE = "data.json"
 VERSION_FILE = "last_version.json"
 
-def load_config():
-    with open(CONFIG_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+def load_json(file_path="data.json"):
+    if not os.path.exists(file_path):
+        return {}
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            return json.load(f) or {}
+    except (json.JSONDecodeError, ValueError):
+        return {}
 
 def get_releases(repo):
+    # 请求头（防拦截、兼容 GitHub Actions）
+    HEADERS = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+        "Accept": "application/octet-stream, */*",
+        "Authorization": f"token {os.getenv('GITHUB_TOKEN', '')}"
+    }
+
     url = f"https://api.github.com/repos/{repo}/releases"
-    resp = requests.get(url)
-    return resp.json() if resp.status_code == 200 else []
+
+    try:
+        response = requests.get(url, headers=HEADERS, timeout=10)
+        if response.status_code != 200:
+            print(f"⚠️ 获取 Releases 失败：{response.status_code}")
+            return []
+
+        releases = response.json()
+
+    except Exception as e:
+        print(f"❌ 获取发布信息失败: {str(e)}")
+        return []
+
+    return releases
 
 def find_latest(releases, include_pre):
     for rel in releases:
