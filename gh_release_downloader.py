@@ -6,7 +6,7 @@ import requests
 CONFIG_FILE = "data.json"
 VERSION_FILE = "last_version.json"
 
-def load_json(file_path="data.json"):
+def load_config(file_path="data.json"):
     if not os.path.exists(file_path):
         return {}
     try:
@@ -76,7 +76,9 @@ if __name__ == "__main__":
     os.makedirs(save_dir, exist_ok=True)
 
     releases = get_releases(repo)
+    print(releases)
     latest = find_latest(releases, pre)
+    print(releases)
     if not latest:
         print("无版本")
         exit(1)
