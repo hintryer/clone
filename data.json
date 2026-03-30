@@ -1,0 +1,6 @@
+{
+  "repo": "Bush2021/chrome_installer",
+  "save_dir": "./downloads",
+  "include_pattern": ".*\\.exe$",
+  "include_pre_release": true
+}
