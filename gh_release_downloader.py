@@ -81,15 +81,36 @@ def find_latest(releases, include_pre):
             return rel
     return None
 
-def download(asset, save_dir):
-    name = asset["name"]
-    url = asset["browser_download_url"]
-    path = os.path.join(save_dir, name)
-    print(f"下载: {name}")
-    with requests.get(url, stream=True) as r:
-        with open(path, "wb") as f:
-            f.write(r.content)
+def download_file(url, save_dir, filename):
+    """
+    下载文件到指定目录
+    :param url: 下载链接
+    :param save_dir: 保存目录
+    :param filename: 保存的文件名
+    """
+    try:
+        # 确保目录存在
+        os.makedirs(save_dir, exist_ok=True)
+        
+        # 拼接完整保存路径
+        save_path = os.path.join(save_dir, filename)
+        
+        print(f"开始下载: {filename}")
+        
+        # 流式下载（大文件不占内存）
+        with requests.get(url, stream=True, timeout=30) as response:
+            response.raise_for_status()  # 抛出 HTTP 错误
+            
+            with open(save_path, "wb") as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+        
+        print(f"下载完成: {filename}\n")
+        return True
 
+    except Exception as e:
+        print(f"下载失败: {filename} | 错误: {str(e)}")
+        return False
 def load_version():
     if os.path.exists(VERSION_FILE):
         with open(VERSION_FILE, "r", encoding="utf-8") as f:
@@ -122,6 +143,7 @@ if __name__ == "__main__":
     # 4. 从 asset 中提取信息
     asset_filename = JSONPath('$.name').parse(target_asset)         # 文件名
     download_url   = JSONPath('$.browser_download_url').parse(target_asset)  # 下载链接
-    
+
+    download_file(download_url,save_dir,asset_filename)
     print(download_url)
     print("✅ 完成")
