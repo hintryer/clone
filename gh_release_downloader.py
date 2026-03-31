@@ -2,6 +2,8 @@ import os
 import re
 import json
 import requests
+from jsonpath import JSONPath
+
 
 CONFIG_FILE = "data.json"
 VERSION_FILE = "last_version.json"
@@ -38,7 +40,16 @@ def get_releases(repo):
         return []
 
     return releases
-
+    
+def get_by_tagname(releases, regex=".*", index=0):
+    # 拼接 JSONPath 表达式
+    path = f"$..[?(@.tag_name =~ /{regex}/)].tag_name"
+    # 执行查询
+    result = JSONPath(path).parse(releases)
+    # 安全取值
+    result2 = result[index] if len(result) > index else None
+    return result2
+    
 def find_latest(releases, include_pre):
     for rel in releases:
         if not include_pre and rel["prerelease"]:
