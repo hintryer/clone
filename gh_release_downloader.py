@@ -41,15 +41,38 @@ def get_releases(repo):
 
     return releases
     
-def get_by_tagname(releases, regex=".*", index=0):
-    # 拼接 JSONPath 表达式
-    path = f"$..[?(@.tag_name =~ /{regex}/)].tag_name"
-    # 执行查询
-    result = JSONPath(path).parse(releases)
-    # 安全取值
-    result2 = result[index] if len(result) > index else None
-    return result2
-    
+# 根据 tag_name 获取 一个 release
+def get_release_by_tag(releases, pattern=".*", index=0):
+    """
+    根据 tag_name 正则匹配，返回单个完整的 release 对象（dict）
+    自带异常捕获，任何错误均返回 None
+    """
+    try:
+        path = f"$..[?(@.tag_name =~ /{pattern}/)]"
+        result = JSONPath(path).parse(releases)
+        return result[index] if (result and len(result) > index) else None
+
+    except (TypeError, AttributeError, IndexError, Exception):
+        return None
+
+# 根据 name 获取 一个 asset
+def get_asset_by_name(release, pattern=".*", index=0):
+    """
+    从单个 release 中，根据 asset.name 正则匹配，返回单个 asset 对象（dict）
+    自带异常捕获，任何错误均返回 None
+    """
+    try:
+        if not isinstance(release, (dict, list)):
+            return None
+
+        path = f"$.assets..[?(@.name =~ /{pattern}/)]"
+        result = JSONPath(path).parse(release)
+        return result[index] if (result and len(result) > index) else None
+
+    except (TypeError, AttributeError, IndexError, Exception):
+        return None
+
+
 def find_latest(releases, include_pre):
     for rel in releases:
         if not include_pre and rel["prerelease"]:
@@ -85,30 +108,20 @@ if __name__ == "__main__":
     pre = cfg["include_pre_release"]
 
     os.makedirs(save_dir, exist_ok=True)
-
-    releases = get_releases(repo)
-    print(get_by_tagname(releases))
+    data=get_releases(repo)
+    # 1. 获取匹配的发布版本（默认第一个）
+    release = get_release_by_tag(data)
     
-    latest = find_latest(releases, pre)
-    print(latest)
-    if not latest:
-        print("无版本")
-        exit(1)
-
-    tag = latest["tag_name"]
-    last = load_version()
-
-    if last and last.get("tag") == tag:
-        print(f"✅ 已是最新版: {tag}")
-        exit(0)
-
-    print(f"🚀 新版本: {tag}")
-
-    # 🔥 正则匹配文件名
-    regex = re.compile(pattern)
-    for asset in latest["assets"]:
-        if regex.match(asset["name"]):
-            download(asset, save_dir)
-
-    save_version(tag)
+    # 2. 从 release 中提取信息
+    repo_name      = JSONPath('$.name').parse(release)               # 仓库名
+    last_version   = JSONPath('$..tag_name').parse(release)         # 最新版本号
+    
+    # 3. 获取指定文件的 asset
+    target_asset   = get_asset_by_name(release, 'MouseClickTool.exe')
+    
+    # 4. 从 asset 中提取信息
+    asset_filename = JSONPath('$.name').parse(target_asset)         # 文件名
+    download_url   = JSONPath('$.browser_download_url').parse(target_asset)  # 下载链接
+    
+    print("✅ download_url")
     print("✅ 完成")
