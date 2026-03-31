@@ -123,5 +123,5 @@ if __name__ == "__main__":
     asset_filename = JSONPath('$.name').parse(target_asset)         # 文件名
     download_url   = JSONPath('$.browser_download_url').parse(target_asset)  # 下载链接
     
-    print("✅ download_url")
+    print(download_url)
     print("✅ 完成")
