@@ -144,6 +144,14 @@ if __name__ == "__main__":
     asset_filename = JSONPath('$.name').parse(target_asset)         # 文件名
     download_url   = JSONPath('$.browser_download_url').parse(target_asset)  # 下载链接
 
-    download_file(download_url,save_dir,asset_filename)
+    # 安全取值（列表 → 字符串）
+    final_filename = asset_filename[0] if asset_filename else None
+    final_url      = download_url[0] if download_url else None
+    
+    # 只有都不为空才下载
+    if final_url and final_filename:
+        download_file(final_url, save_dir, final_filename)
+    else:
+        print("下载失败：未获取到有效链接或文件名")
     print(download_url)
     print("✅ 完成")
