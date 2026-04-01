@@ -52,17 +52,14 @@ def get_release_by_tag(releases, pattern=".*", index=0):
         # 1. tag_name 匹配正则
         # 2. prerelease == false（排除预览版）
         path2 = '$..[?(@.prerelease == false)]'
-        print(path2)
         releases2 = JSONPath(path2).parse(releases)
+        
         stable_releases = [
             r for r in releases
             if isinstance(r, dict) and r.get("prerelease") is False
         ]
-        
-        print(releases2)
-        print(stable_releases)
         path = f"$..[?(@.tag_name =~ /{pattern}/)]"
-        result = JSONPath(path).parse(releases2)
+        result = JSONPath(path).parse(stable_releases)
         return result[index] if (result and len(result) > index) else None
 
     except Exception:
@@ -200,5 +197,5 @@ def main2():
         json.dump(data, f, ensure_ascii=False, indent=2)
     release = get_release_by_tag(data)
 if __name__ == "__main__":
-    main2()
+    main()
     print("✅ 完成")
