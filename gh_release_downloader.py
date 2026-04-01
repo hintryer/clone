@@ -51,7 +51,7 @@ def get_release_by_tag(releases, pattern=".*", index=0):
         # 核心修改：这里同时满足 2 个条件
         # 1. tag_name 匹配正则
         # 2. prerelease == false（排除预览版）
-        path = f"$..[?(@.tag_name =~ /{pattern}/ && $..prerelease == false)]"
+        path = f"$.[?(@.tag_name =~ /{pattern}/ && @.prerelease == false)]"
         result = JSONPath(path).parse(releases)
         return result[index] if (result and len(result) > index) else None
 
