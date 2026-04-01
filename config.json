@@ -1,0 +1,20 @@
+[
+  {
+    "repo": "lalakii/MouseClickTool",
+    "save_dir": "./downloads",
+    "tagregex": "",
+    "assetregex": "MouseClickTool.exe",
+    "last_version": "v1.2.3",
+    "asset_filename": "MouseClickTool.exe",
+    "download_url": "https://..."
+  },
+  {
+    "repo": "lalakii/MouseClickTool",
+    "save_dir": "./downloads",
+    "tagregex": "",
+    "assetregex": "MouseClickTool.exe",
+    "last_version": "v1.2.3",
+    "asset_filename": "MouseClickTool.exe",
+    "download_url": "https://..."
+  }
+]
