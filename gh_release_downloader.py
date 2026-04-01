@@ -54,7 +54,13 @@ def get_release_by_tag(releases, pattern=".*", index=0):
         path2 = '$[?(@.prerelease == "false")]'
         print(path2)
         releases2 = JSONPath(path2).parse(releases)
+        stable_releases = [
+            r for r in releases
+            if isinstance(r, dict) and r.get("prerelease") is False
+        ]
+        
         print(releases2)
+        print(stable_releases)
         path = f"$..[?(@.tag_name =~ /{pattern}/)]"
         result = JSONPath(path).parse(releases2)
         return result[index] if (result and len(result) > index) else None
