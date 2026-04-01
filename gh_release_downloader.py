@@ -158,10 +158,11 @@ def main():
     
     # 2. 遍历每一个配置并更新
     for cfg in config_list:
+      print(f"【更新】{cfg['repo']}")
        old_version = cfg["last_version"]
         
         # ✨ 核心：调用函数，一行获取最新信息
-        new_info = get_updated_tool_info(cfg)
+        new_info = get_updated_info(cfg)
 
         if not new_info:
             continue  # 获取失败则跳过
