@@ -33,3 +33,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 内置Token（API调用）
         run: |
           python gh_release_downloader.py
+      - name: 执行更新脚本
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Auto update software versions"
+          git push
