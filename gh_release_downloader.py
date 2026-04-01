@@ -188,7 +188,7 @@ def main():
         
 def main2():
     data = get_releases('lalakii/MouseClickTool')
-    release = get_release_by_tag(data, tagregex)
+    release = get_release_by_tag(data)
 if __name__ == "__main__":
     main2()
     print("✅ 完成")
