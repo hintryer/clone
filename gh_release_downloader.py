@@ -161,6 +161,41 @@ def updatefile(repo, save_dir, tagregex, assetregex):
     # 下载
     download_file(download_url, save_dir, asset_filename)
 
+def main2():
+    # 1. 读取配置
+    with open("config.json", "r", encoding="utf-8") as f:
+        config_list = json.load(f)
+    
+    # 2. 遍历每一个配置并更新
+    for cfg in config_list:
+        repo = cfg["repo"]
+        save_dir = cfg["save_dir"]
+        tagregex = cfg["tagregex"]
+        assetregex = cfg["assetregex"]
+        
+        # 获取 GitHub 数据（你原来的函数，我补好缩进）
+        data = get_releases(repo)
+        release = get_release_by_tag(data, tagregex)
+        target_asset = get_asset_by_name(release, assetregex)
+    
+        # 解析最新信息
+        repo_name = get_first_value(release, '$.name')
+        last_version = get_first_value(release, '$..tag_name')
+        asset_filename = get_first_value(target_asset, '$.name')
+        download_url = get_first_value(target_asset, '$.browser_download_url')
+        
+        print("最新版本:", last_version)
+        print("下载地址:", download_url)
+        
+        # ✅ 关键：直接修改数组里的对象
+        cfg["last_version"] = last_version
+        cfg["download_url"] = download_url  # 顺便更新下载地址
+        cfg["asset_filename"] = asset_filename  # 可选
+
+    # 3. ✅ 必须：把修改后的数据写回文件
+    with open("config.json", "w", encoding="utf-8") as f:
+        json.dump(config_list, f, ensure_ascii=False, indent=2)
+        
 def main():
     cfg = load_config()
     repo = cfg["repo"]
@@ -171,4 +206,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+    main2()
     print("✅ 完成")
