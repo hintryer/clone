@@ -119,8 +119,6 @@ def get_updated_info(config):
     返回 最新版本信息字典（结构和 config 完全一致）
     自动排除 prerelease
     """
-    import jsonpath  # 确保你已安装 jsonpath-python
-
     repo = config["repo"]
     tagregex = config["tagregex"]
     assetregex = config["assetregex"]
@@ -141,7 +139,7 @@ def get_updated_info(config):
     asset_filename = get_first_value(target_asset, '$.name')
     download_url = get_first_value(target_asset, '$.browser_download_url')
 
-    # 返回结构 = 和 cfg 完全一样！
+    # 返回结构 = 和 config 完全一样！
     return {
         "repo": repo,
         "save_dir": config["save_dir"],
