@@ -1,6 +1,9 @@
 {
   "repo": "lalakii/MouseClickTool",
   "save_dir": "./downloads",
-  "include_pattern": ".*\\.exe$",
-  "include_pre_release": true
+  "tagregex": "",
+  "assetregex": "MouseClickTool.exe",
+  "last_version": "v1.2.3",
+  "asset_filename": "MouseClickTool.exe",
+  "download_url": "https://..."
 }
