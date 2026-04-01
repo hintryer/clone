@@ -40,18 +40,22 @@ def get_releases(repo):
 
     return releases
     
-# 根据 tag_name 获取 一个 release
+# 根据 tag_name 获取 一个 release（已排除 prerelease）
 def get_release_by_tag(releases, pattern=".*", index=0):
     """
-    根据 tag_name 正则匹配，返回单个完整的 release 对象（dict）
+    根据 tag_name 正则匹配 + 排除 prerelease
+    返回单个完整的 release 对象（dict）
     自带异常捕获，任何错误均返回 None
     """
     try:
-        path = f"$..[?(@.tag_name =~ /{pattern}/)]"
+        # 核心修改：这里同时满足 2 个条件
+        # 1. tag_name 匹配正则
+        # 2. prerelease == false（排除预览版）
+        path = f"$..[?(@.tag_name =~ /{pattern}/ && @.prerelease == false)]"
         result = JSONPath(path).parse(releases)
         return result[index] if (result and len(result) > index) else None
 
-    except (TypeError, AttributeError, IndexError, Exception):
+    except Exception:
         return None
 
 # 根据 name 获取 一个 asset
