@@ -4,38 +4,9 @@ import json
 import requests
 from jsonpath import JSONPath
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-json_path = os.path.join(current_dir, "releases.json")
-with open(json_path, "r", encoding="utf-8") as f:
-    data = json.load(f)
-print("读取成功！文件内容：")
-
-
 CONFIG_FILE = "data.json"
 INFO_FILE = "data.json"
 
-def load_release_info():
-    try:
-        with open(INFO_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except:
-        return {}
-
-# 局部更新：只更新需要更新的字段，不改动其他
-def update_release_info(repo, **fields):
-    data = load_release_info()
-    
-    if repo not in data:
-        data[repo] = {}
-    
-    # 只更新传入的字段，不覆盖其他
-    for key, value in fields.items():
-        if value is not None:
-            data[repo][key] = value
-
-    with open(INFO_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
-        
 def load_config(file_path="data.json"):
     if not os.path.exists(file_path):
         return {}
@@ -161,7 +132,7 @@ def updatefile(repo, save_dir, tagregex, assetregex):
     # 下载
     download_file(download_url, save_dir, asset_filename)
 
-def main2():
+def main():
     # 1. 读取配置
     with open("config.json", "r", encoding="utf-8") as f:
         config_list = json.load(f)
@@ -173,7 +144,7 @@ def main2():
         tagregex = cfg["tagregex"]
         assetregex = cfg["assetregex"]
         
-        # 获取 GitHub 数据（你原来的函数，我补好缩进）
+        # 获取 GitHub 数据
         data = get_releases(repo)
         release = get_release_by_tag(data, tagregex)
         target_asset = get_asset_by_name(release, assetregex)
@@ -186,25 +157,18 @@ def main2():
         
         print("最新版本:", last_version)
         print("下载地址:", download_url)
+        download_file(download_url, save_dir, asset_filename)
         
-        # ✅ 关键：直接修改数组里的对象
+        # 关键：直接修改数组里的对象
         cfg["last_version"] = last_version
-        cfg["download_url"] = download_url  # 顺便更新下载地址
-        cfg["asset_filename"] = asset_filename  # 可选
+        cfg["download_url"] = download_url
+        cfg["asset_filename"] = asset_filename
 
-    # 3. ✅ 必须：把修改后的数据写回文件
+    # 3. 把修改后的数据写回文件
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config_list, f, ensure_ascii=False, indent=2)
         
-def main():
-    cfg = load_config()
-    repo = cfg["repo"]
-    save_dir = cfg["save_dir"]
-    tagregex = cfg["tagregex"]
-    assetregex = cfg["assetregex"]
-    updatefile(repo,save_dir, tagregex, assetregex)
 
 if __name__ == "__main__":
     main()
-    main2()
     print("✅ 完成")
