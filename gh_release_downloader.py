@@ -170,6 +170,7 @@ def main():
         asset_filename = new_info["asset_filename"]
         save_dir = new_info["save_dir"]
 
+        print(last_version)
         # 版本不同 → 下载 + 更新
         if last_version != old_version:
             print(f"【更新】{cfg['repo']} | {old_version} → {last_version}")
