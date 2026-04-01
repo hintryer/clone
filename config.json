@@ -1,7 +1,7 @@
 [
   {
     "repo": "lalakii/MouseClickTool",
-    "save_dir": "./downloads",
+    "save_dir": "soft/单文件",
     "tagregex": "",
     "assetregex": "MouseClickTool.exe",
     "last_version": "3.1.0.0",
@@ -9,12 +9,111 @@
     "download_url": "https://github.com/lalakii/MouseClickTool/releases/download/3.1.0.0/MouseClickTool.exe"
   },
   {
-    "repo": "lalakii/MouseClickTool",
-    "save_dir": "./downloads",
+    "repo": "zufuliu/notepad4",
+    "save_dir": "soft/文本办公",
     "tagregex": "",
-    "assetregex": "MouseClickTool.exe",
-    "last_version": "3.1.0.0",
-    "asset_filename": "MouseClickTool.exe",
-    "download_url": "https://github.com/lalakii/MouseClickTool/releases/download/3.1.0.0/MouseClickTool.exe"
+    "assetregex": "Notepad4.*zh-Hans_x64.*",
+    "last_version": "",
+    "asset_filename": "",
+    "download_url": ""
+  },
+  {
+    "repo": "zhongyang219/MusicPlayer2",
+    "save_dir": "soft/影音工具",
+    "tagregex": "",
+    "assetregex": "MusicPlayer2.*_V.*_x64.zip",
+    "last_version": "",
+    "asset_filename": "",
+    "download_url": ""
+  },
+  {
+    "repo": "WEIFENG2333/VideoCaptioner",
+    "save_dir": "soft/影音工具",
+    "tagregex": "",
+    "assetregex": "VideoCaptioner.*win64.*",
+    "last_version": "",
+    "asset_filename": "",
+    "download_url": ""
+  },
+  {
+    "repo": "cylind/scribe2srt",
+    "save_dir": "soft/影音工具",
+    "tagregex": "",
+    "assetregex": "Scribe2SRT.*windows-x86_64.*",
+    "last_version": "",
+    "asset_filename": "",
+    "download_url": ""
+  },
+  {
+    "repo": "jeanslack/Videomass",
+    "save_dir": "soft/影音工具",
+    "tagregex": "",
+    "assetregex": "Videomass.*win64-portable.*",
+    "last_version": "",
+    "asset_filename": "",
+    "download_url": ""
+  },
+  {
+    "repo": "eibols/ffmpeg_batch",
+    "save_dir": "soft/影音工具",
+    "tagregex": "",
+    "assetregex": "Portable",
+    "last_version": "",
+    "asset_filename": "",
+    "download_url": ""
+  },
+  {
+    "repo": "chenhb23/lanzouyun-disk",
+    "save_dir": "soft/下载传输",
+    "tagregex": "",
+    "assetregex": "lanzouyun.*x64-win.*",
+    "last_version": "",
+    "asset_filename": "",
+    "download_url": ""
+  },
+  {
+    "repo": "localsend/localsend",
+    "save_dir": "soft/下载传输",
+    "tagregex": "",
+    "assetregex": "windows-x86-64.zip",
+    "last_version": "",
+    "asset_filename": "",
+    "download_url": ""
+  },
+  {
+    "repo": "ScottSloan/Bili23-Downloader",
+    "save_dir": "soft/其他工具",
+    "tagregex": "",
+    "assetregex": "windows-x64.zip",
+    "last_version": "",
+    "asset_filename": "",
+    "download_url": ""
+  },
+  {
+    "repo": "clash-verge-rev/clash-verge-rev",
+    "save_dir": "soft/其他工具",
+    "tagregex": "",
+    "assetregex": "x64-setup.exe",
+    "last_version": "",
+    "asset_filename": "",
+    "download_url": ""
+  },
+  {
+    "repo": "GyanD/codexffmpeg",
+    "save_dir": "soft/编程工具",
+    "tagregex": "",
+    "assetregex": "essentials_build.7z",
+    "last_version": "",
+    "asset_filename": "",
+    "download_url": ""
+  },
+  {
+    "repo": "git-for-windows/git",
+    "save_dir": "soft/编程工具",
+    "tagregex": "",
+    "assetregex": "64-bit.7z.exe",
+    "last_version": "",
+    "asset_filename": "",
+    "download_url": ""
   }
 ]
