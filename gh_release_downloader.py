@@ -143,7 +143,7 @@ def main():
         save_dir = cfg["save_dir"]
         tagregex = cfg["tagregex"]
         assetregex = cfg["assetregex"]
-        
+        old_version = cfg["last_version"]
         # 获取 GitHub 数据
         data = get_releases(repo)
         release = get_release_by_tag(data, tagregex)
@@ -157,12 +157,13 @@ def main():
         
         print("最新版本:", last_version)
         print("下载地址:", download_url)
-        download_file(download_url, save_dir, asset_filename)
-        
-        # 关键：直接修改数组里的对象
-        cfg["last_version"] = last_version
-        cfg["download_url"] = download_url
-        cfg["asset_filename"] = asset_filename
+        if last_version != old_version:
+            print(f"【更新】{repo}：{old_version} → {last_version}")
+            download_file(download_url, save_dir, asset_filename)
+            
+            cfg["last_version"] = last_version
+            cfg["download_url"] = download_url
+            cfg["asset_filename"] = asset_filename
 
     # 3. 把修改后的数据写回文件
     with open("config.json", "w", encoding="utf-8") as f:
