@@ -188,6 +188,7 @@ def main():
         
 def main2():
     data = get_releases('lalakii/MouseClickTool')
+    print(data)
     release = get_release_by_tag(data)
 if __name__ == "__main__":
     main2()
