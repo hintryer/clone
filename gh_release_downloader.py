@@ -194,7 +194,7 @@ def main():
         json.dump(config_list, f, ensure_ascii=False, indent=2)
         
 def main2():
-    data = get_releases('lalakii/MouseClickTool')
+    data = get_releases('git-for-windows/git')
     # 保存到本地文件（缩进 100% 正确）
     with open("github_api_response.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
