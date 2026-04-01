@@ -170,7 +170,8 @@ def check_and_update(cfg, new_info):
     save_dir = new_info["save_dir"]
 
     print(f"当前版本: {old_version} → 最新版本: {last_version}")
-
+    current_file_path = os.path.join(save_dir, asset_filename)
+    
     if last_version == old_version:
         if os.path.exists(current_file_path):
             print("✅ 已是最新版本，文件正常\n")
