@@ -12,8 +12,30 @@ print("读取成功！文件内容：")
 
 
 CONFIG_FILE = "data.json"
-VERSION_FILE = "last_version.json"
+INFO_FILE = "data.json"
 
+def load_release_info():
+    try:
+        with open(INFO_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except:
+        return {}
+
+# 局部更新：只更新需要更新的字段，不改动其他
+def update_release_info(repo, **fields):
+    data = load_release_info()
+    
+    if repo not in data:
+        data[repo] = {}
+    
+    # 只更新传入的字段，不覆盖其他
+    for key, value in fields.items():
+        if value is not None:
+            data[repo][key] = value
+
+    with open(INFO_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+        
 def load_config(file_path="data.json"):
     if not os.path.exists(file_path):
         return {}
@@ -115,23 +137,37 @@ def get_first_value(obj, path):
         return res[0] if res else None
     except:
         return None
-def main():
-    cfg = load_config()
-    repo = cfg["repo"]
-    save_dir = cfg["save_dir"]
 
-    data=get_releases(repo)
+def updatefile(repo, save_dir, tagregex, assetregex):
+    data = get_releases(repo)
+    release = get_release_by_tag(data, tagregex)
+    target_asset = get_asset_by_name(release, assetregex)
 
-    release = get_release_by_tag(data)
-    target_asset = get_asset_by_name(release, 'MouseClickTool.exe')
-    
-    # 直接获取字符串
+    # 获取最新信息
     repo_name = get_first_value(release, '$.name')
     last_version = get_first_value(release, '$..tag_name')
     asset_filename = get_first_value(target_asset, '$.name')
     download_url = get_first_value(target_asset, '$.browser_download_url')
 
+    # ====================== 关键：只更新有值的字段，不影响其他 ======================
+    update_release_info(
+        repo,
+        repo_name=repo_name,
+        last_version=last_version,
+        asset_filename=asset_filename,
+        download_url=download_url
+    )
+
+    # 下载
     download_file(download_url, save_dir, asset_filename)
+
+def main():
+    cfg = load_config()
+    repo = cfg["repo"]
+    save_dir = cfg["save_dir"]
+    tagregex = cfg["tagregex"]
+    assetregex = cfg["assetregex"]
+    updatefile(repo,save_dir, tagregex, assetregex)
 
 if __name__ == "__main__":
     main()
