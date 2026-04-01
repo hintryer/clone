@@ -134,8 +134,7 @@ def updatefile(repo, save_dir, tagregex, assetregex):
 
 def main():
     # 1. 读取配置
-    with open("config.json", "r", encoding="utf-8") as f:
-        config_list = json.load(f)
+    config_list = load_config()
     
     # 2. 遍历每一个配置并更新
     for cfg in config_list:
