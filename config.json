@@ -85,9 +85,9 @@
     "save_dir": "soft/其他工具",
     "tagregex": "",
     "assetregex": "windows-x64.zip",
-    "last_version": null,
-    "asset_filename": null,
-    "download_url": null
+    "last_version": "v1.70.4",
+    "asset_filename": "Bili23_Downloader-1.70.4-windows-x64.zip",
+    "download_url": "https://github.com/ScottSloan/Bili23-Downloader/releases/download/v1.70.4/Bili23_Downloader-1.70.4-windows-x64.zip"
   },
   {
     "repo": "clash-verge-rev/clash-verge-rev",
@@ -112,8 +112,8 @@
     "save_dir": "soft/编程工具",
     "tagregex": "",
     "assetregex": "-64-bit.zip",
-    "last_version": "untagged-8231769e9b878a01c378",
-    "asset_filename": "MinGit-2.47.3.2-64-bit.zip",
-    "download_url": "https://github.com/git-for-windows/git/releases/download/untagged-8231769e9b878a01c378/MinGit-2.47.3.2-64-bit.zip"
+    "last_version": "v2.53.0.windows.2",
+    "asset_filename": "MinGit-2.53.0.2-64-bit.zip",
+    "download_url": "https://github.com/git-for-windows/git/releases/download/v2.53.0.windows.2/MinGit-2.53.0.2-64-bit.zip"
   }
 ]
