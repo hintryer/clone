@@ -52,7 +52,8 @@ def get_release_by_tag(releases, pattern=".*", index=0):
         # 1. tag_name 匹配正则
         # 2. prerelease == false（排除预览版）
         path2 = f"$..[?(@.prerelease == false)]"
-        releases2 = JSONPath(path).parse(releases)
+        releases2 = JSONPath(path2).parse(releases)
+        
         path = f"$..[?(@.tag_name =~ /{pattern}/)]"
         result = JSONPath(path).parse(releases2)
         return result[index] if (result and len(result) > index) else None
@@ -185,7 +186,9 @@ def main():
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config_list, f, ensure_ascii=False, indent=2)
         
-
+def main2():
+    data = get_releases('lalakii/MouseClickTool')
+    release = get_release_by_tag(data, tagregex)
 if __name__ == "__main__":
     main()
     print("✅ 完成")
