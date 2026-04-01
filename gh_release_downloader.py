@@ -189,6 +189,7 @@ def main():
 def main2():
     data = get_releases('lalakii/MouseClickTool')
     print(data)
+    # 保存到本地文件（缩进 100% 正确）
     with open("github_api_response.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     release = get_release_by_tag(data)
