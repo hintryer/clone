@@ -190,7 +190,7 @@ def main2():
     data = get_releases('lalakii/MouseClickTool')
     print(data)
     with open("github_api_response.json", "w", encoding="utf-8") as f:
-    json.dump(data, f, ensure_ascii=False, indent=2)
+        json.dump(data, f, ensure_ascii=False, indent=2)
     release = get_release_by_tag(data)
 if __name__ == "__main__":
     main2()
