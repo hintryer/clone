@@ -113,28 +113,44 @@ def get_first_value(obj, path):
     except:
         return None
 
-def updatefile(repo, save_dir, tagregex, assetregex):
+def get_updated_info(config):
+    """
+    传入配置项 config
+    返回 最新版本信息字典（结构和 config 完全一致）
+    自动排除 prerelease
+    """
+    import jsonpath  # 确保你已安装 jsonpath-python
+
+    repo = config["repo"]
+    tagregex = config["tagregex"]
+    assetregex = config["assetregex"]
+
+    # 获取 GitHub 数据
     data = get_releases(repo)
     release = get_release_by_tag(data, tagregex)
+    
+    if not release:
+        return None  # 没找到 release 直接返回
+    
     target_asset = get_asset_by_name(release, assetregex)
+    if not target_asset:
+        return None
 
-    # 获取最新信息
-    repo_name = get_first_value(release, '$.name')
+    # 解析信息
     last_version = get_first_value(release, '$..tag_name')
     asset_filename = get_first_value(target_asset, '$.name')
     download_url = get_first_value(target_asset, '$.browser_download_url')
-    print(download_url)
-    # ====================== 关键：只更新有值的字段，不影响其他 ======================
-    update_release_info(
-        repo,
-        repo_name=repo_name,
-        last_version=last_version,
-        asset_filename=asset_filename,
-        download_url=download_url
-    )
 
-    # 下载
-    download_file(download_url, save_dir, asset_filename)
+    # 返回结构 = 和 cfg 完全一样！
+    return {
+        "repo": repo,
+        "save_dir": config["save_dir"],
+        "tagregex": tagregex,
+        "assetregex": assetregex,
+        "last_version": last_version,
+        "asset_filename": asset_filename,
+        "download_url": download_url
+    }
 
 def main():
     # 1. 读取配置
@@ -142,33 +158,28 @@ def main():
     
     # 2. 遍历每一个配置并更新
     for cfg in config_list:
-        repo = cfg["repo"]
-        save_dir = cfg["save_dir"]
-        tagregex = cfg["tagregex"]
-        assetregex = cfg["assetregex"]
-        old_version = cfg["last_version"]
-        # 获取 GitHub 数据
-        data = get_releases(repo)
-        release = get_release_by_tag(data, tagregex)
-        target_asset = get_asset_by_name(release, assetregex)
-    
-        # 解析最新信息
-        repo_name = get_first_value(release, '$.name')
-        last_version = get_first_value(release, '$..tag_name')
-        asset_filename = get_first_value(target_asset, '$.name')
-        download_url = get_first_value(target_asset, '$.browser_download_url')
+       old_version = cfg["last_version"]
         
-        print("最新版本:", last_version)
-        print("下载地址:", download_url)
-        if last_version != old_version:
-            print(f"【更新】{repo}：{old_version} → {last_version}")
-            download_file(download_url, save_dir, asset_filename)
-            
-            cfg["last_version"] = last_version
-            cfg["download_url"] = download_url
-            cfg["asset_filename"] = asset_filename
+        # ✨ 核心：调用函数，一行获取最新信息
+        new_info = get_updated_tool_info(cfg)
 
-    # 3. 把修改后的数据写回文件
+        if not new_info:
+            continue  # 获取失败则跳过
+
+        last_version = new_info["last_version"]
+        download_url = new_info["download_url"]
+        asset_filename = new_info["asset_filename"]
+        save_dir = new_info["save_dir"]
+
+        # 版本不同 → 下载 + 更新
+        if last_version != old_version:
+            print(f"【更新】{cfg['repo']} | {old_version} → {last_version}")
+            download_file(download_url, save_dir, asset_filename)
+
+            # 直接用 new_info 覆盖 cfg ✅
+            cfg.update(new_info)
+
+    # 保存回文件
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config_list, f, ensure_ascii=False, indent=2)
         
