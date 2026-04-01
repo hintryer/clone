@@ -51,7 +51,7 @@ def get_release_by_tag(releases, pattern=".*", index=0):
         # 核心修改：这里同时满足 2 个条件
         # 1. tag_name 匹配正则
         # 2. prerelease == false（排除预览版）
-        path2 = '$[?(@.prerelease == "false")]'
+        path2 = '$..[?(@.prerelease == "false")]'
         print(path2)
         releases2 = JSONPath(path2).parse(releases)
         stable_releases = [
