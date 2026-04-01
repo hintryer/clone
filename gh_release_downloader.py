@@ -148,7 +148,7 @@ def updatefile(repo, save_dir, tagregex, assetregex):
     last_version = get_first_value(release, '$..tag_name')
     asset_filename = get_first_value(target_asset, '$.name')
     download_url = get_first_value(target_asset, '$.browser_download_url')
-
+    print(download_url)
     # ====================== 关键：只更新有值的字段，不影响其他 ======================
     update_release_info(
         repo,
