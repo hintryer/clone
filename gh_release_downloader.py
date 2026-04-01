@@ -128,17 +128,19 @@ def get_updated_info(config):
     release = get_release_by_tag(data, tagregex)
     
     if not release:
-        return None  # 没找到 release 直接返回
+        print(f"❌ 未找到正式版: {repo}")
+        return None
     
     target_asset = get_asset_by_name(release, assetregex)
     if not target_asset:
+        print(f"❌ 未找到匹配文件: {repo}")
         return None
 
     # 解析信息
     last_version = get_first_value(release, '$..tag_name')
     asset_filename = get_first_value(target_asset, '$.name')
     download_url = get_first_value(target_asset, '$.browser_download_url')
-
+    print(f"✅ 获取成功：{repo} → {last_version}") 
     # 返回结构 = 和 config 完全一样！
     return {
         "repo": repo,
