@@ -112,8 +112,8 @@
     "save_dir": "soft/编程工具",
     "tagregex": "",
     "assetregex": "-64-bit.zip",
-    "last_version": "",
-    "asset_filename": null,
-    "download_url": null
+    "last_version": "untagged-8231769e9b878a01c378",
+    "asset_filename": "MinGit-2.47.3.2-64-bit.zip",
+    "download_url": "https://github.com/git-for-windows/git/releases/download/untagged-8231769e9b878a01c378/MinGit-2.47.3.2-64-bit.zip"
   }
 ]
