@@ -171,10 +171,14 @@ def check_and_update(cfg, new_info):
 
     print(f"当前版本: {old_version} → 最新版本: {last_version}")
 
-    # 版本相同，跳过
     if last_version == old_version:
-        print("✅ 已是最新版本\n")
-        return False
+        if os.path.exists(current_file_path):
+            print("✅ 已是最新版本，文件正常\n")
+            return False
+        else:
+            print("⚠️ 版本相同但文件丢失，开始重新下载...")
+            dl_ok = download_file(download_url, save_dir, asset_filename)
+            return dl_ok  # 下载成功就算更新成功
 
     # 开始下载
     print(f"【更新】{cfg['repo']}")
