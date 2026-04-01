@@ -4,10 +4,10 @@ import json
 import requests
 from jsonpath import JSONPath
 
-CONFIG_FILE = "data.json"
+CONFIG_FILE = "config.json"
 INFO_FILE = "data.json"
 
-def load_config(file_path="data.json"):
+def load_config(file_path="config.json"):
     if not os.path.exists(file_path):
         return {}
     try:
