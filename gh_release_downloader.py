@@ -159,6 +159,42 @@ def get_updated_info(config):
         "download_url": download_url
     }
 
+def check_and_update(cfg, new_info):
+    """
+    检查版本 → 下载 → 成功则删除旧文件 → 写入新文件
+    """
+    old_version = cfg["last_version"]
+    last_version = new_info["last_version"]
+    download_url = new_info["download_url"]
+    asset_filename = new_info["asset_filename"]
+    save_dir = new_info["save_dir"]
+
+    print(f"当前版本: {old_version} → 最新版本: {last_version}")
+
+    # 版本相同，跳过
+    if last_version == old_version:
+        print("✅ 已是最新版本\n")
+        return False
+
+    # 开始下载
+    print(f"【更新】{cfg['repo']}")
+    dl_ok = download_file(download_url, save_dir, asset_filename)
+
+    # 下载成功 → 删除旧文件
+    if dl_ok:
+        old_file = cfg.get("asset_filename")
+        if old_file and old_file != asset_filename:
+            old_path = os.path.join(save_dir, old_file)
+            if os.path.exists(old_path):
+                os.remove(old_path)
+                print(f"🗑️ 已删除旧文件: {old_file}")
+        
+        print("✅ 更新成功\n")
+        return True
+    else:
+        print("❌ 下载失败，不更新\n")
+        return False
+        
 def main():
     # 1. 读取配置
     config_list = load_config()
@@ -166,24 +202,12 @@ def main():
     # 2. 遍历每一个配置并更新
     for cfg in config_list:
         print(f"【检查更新】{cfg['repo']}")
-        old_version = cfg["last_version"]
         new_info = get_updated_info(cfg)
-
+    
         if not new_info:
-            continue  # 获取失败则跳过
-
-        last_version = new_info["last_version"]
-        download_url = new_info["download_url"]
-        asset_filename = new_info["asset_filename"]
-        save_dir = new_info["save_dir"]
-
-        print(last_version)
-        # 版本不同 → 下载 + 更新
-        if last_version != old_version:
-            print(f"【更新】{cfg['repo']} | {old_version} → {last_version}")
-            download_file(download_url, save_dir, asset_filename)
-
-            # 直接用 new_info 覆盖 cfg ✅
+            continue
+        # 调用一次 = 全部搞定
+        if check_and_update(cfg, new_info):
             cfg.update(new_info)
 
     # 保存回文件
