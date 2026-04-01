@@ -4,34 +4,34 @@
     "save_dir": "soft/单文件",
     "tagregex": "",
     "assetregex": "MouseClickTool.exe",
-    "last_version": "3.1.0.0",
-    "asset_filename": "MouseClickTool.exe",
-    "download_url": "https://github.com/lalakii/MouseClickTool/releases/download/3.1.0.0/MouseClickTool.exe"
+    "last_version": null,
+    "asset_filename": null,
+    "download_url": null
   },
   {
     "repo": "zufuliu/notepad4",
     "save_dir": "soft/文本办公",
     "tagregex": "",
     "assetregex": "Notepad4.*zh-Hans_x64.*",
-    "last_version": "v26.03r6058",
-    "asset_filename": "Notepad4_HD_zh-Hans_x64_v26.03r6058.zip",
-    "download_url": "https://github.com/zufuliu/notepad4/releases/download/v26.03r6058/Notepad4_HD_zh-Hans_x64_v26.03r6058.zip"
+    "last_version": null,
+    "asset_filename": null,
+    "download_url": null
   },
   {
     "repo": "zhongyang219/MusicPlayer2",
     "save_dir": "soft/影音工具",
     "tagregex": "",
     "assetregex": "MusicPlayer2.*_V.*_x64.zip",
-    "last_version": "V2.78",
-    "asset_filename": "MusicPlayer2_V2.78_x64.zip",
-    "download_url": "https://github.com/zhongyang219/MusicPlayer2/releases/download/V2.78/MusicPlayer2_V2.78_x64.zip"
+    "last_version": null,
+    "asset_filename": null,
+    "download_url": null
   },
   {
     "repo": "WEIFENG2333/VideoCaptioner",
     "save_dir": "soft/影音工具",
     "tagregex": "",
     "assetregex": "VideoCaptioner.*win64.*",
-    "last_version": "v1.4.1",
+    "last_version": null,
     "asset_filename": null,
     "download_url": null
   },
@@ -40,52 +40,52 @@
     "save_dir": "soft/影音工具",
     "tagregex": "",
     "assetregex": "Scribe2SRT.*windows-x86_64.*",
-    "last_version": "v0.3.5",
-    "asset_filename": "Scribe2SRT-v0.3.5-windows-x86_64.zip",
-    "download_url": "https://github.com/cylind/scribe2srt/releases/download/v0.3.5/Scribe2SRT-v0.3.5-windows-x86_64.zip"
+    "last_version": null,
+    "asset_filename": null,
+    "download_url": null
   },
   {
     "repo": "jeanslack/Videomass",
     "save_dir": "soft/影音工具",
     "tagregex": "",
     "assetregex": "Videomass.*win64-portable.*",
-    "last_version": "v6.1.20",
-    "asset_filename": "Videomass-6.1.20-win64-portable.7z",
-    "download_url": "https://github.com/jeanslack/Videomass/releases/download/v6.1.20/Videomass-6.1.20-win64-portable.7z"
+    "last_version": null,
+    "asset_filename": null,
+    "download_url": null
   },
   {
     "repo": "eibols/ffmpeg_batch",
     "save_dir": "soft/影音工具",
     "tagregex": "",
     "assetregex": "Portable",
-    "last_version": "3.2.8",
-    "asset_filename": "FFmpeg_Batch_AV_Converter_Portable_3.2.8_x64.zip",
-    "download_url": "https://github.com/eibols/ffmpeg_batch/releases/download/3.2.8/FFmpeg_Batch_AV_Converter_Portable_3.2.8_x64.zip"
+    "last_version": null,
+    "asset_filename": null,
+    "download_url": null
   },
   {
     "repo": "chenhb23/lanzouyun-disk",
     "save_dir": "soft/下载传输",
     "tagregex": "",
     "assetregex": "lanzouyun.*x64-win.*",
-    "last_version": "v3.5.3",
-    "asset_filename": "lanzouyun-3.5.3-x64-win.zip",
-    "download_url": "https://github.com/chenhb23/lanzouyun-disk/releases/download/v3.5.3/lanzouyun-3.5.3-x64-win.zip"
+    "last_version": null,
+    "asset_filename": null,
+    "download_url": null
   },
   {
     "repo": "localsend/localsend",
     "save_dir": "soft/下载传输",
     "tagregex": "",
     "assetregex": "windows-x86-64.zip",
-    "last_version": "v1.17.0",
-    "asset_filename": "LocalSend-1.17.0-windows-x86-64.zip",
-    "download_url": "https://github.com/localsend/localsend/releases/download/v1.17.0/LocalSend-1.17.0-windows-x86-64.zip"
+    "last_version": null,
+    "asset_filename": null,
+    "download_url": null
   },
   {
     "repo": "ScottSloan/Bili23-Downloader",
     "save_dir": "soft/其他工具",
     "tagregex": "",
     "assetregex": "windows-x64.zip",
-    "last_version": "v2.00.0-rc.2",
+    "last_version": null,
     "asset_filename": null,
     "download_url": null
   },
@@ -94,26 +94,26 @@
     "save_dir": "soft/其他工具",
     "tagregex": "",
     "assetregex": "x64-setup.exe",
-    "last_version": "v2.4.7",
-    "asset_filename": "Clash.Verge_2.4.7_x64-setup.exe",
-    "download_url": "https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.4.7/Clash.Verge_2.4.7_x64-setup.exe"
+    "last_version": null,
+    "asset_filename": null,
+    "download_url": null
   },
   {
     "repo": "GyanD/codexffmpeg",
     "save_dir": "soft/编程工具",
     "tagregex": "",
     "assetregex": "essentials_build.7z",
-    "last_version": "8.1",
-    "asset_filename": "ffmpeg-8.1-essentials_build.7z",
-    "download_url": "https://github.com/GyanD/codexffmpeg/releases/download/8.1/ffmpeg-8.1-essentials_build.7z"
+    "last_version": null,
+    "asset_filename": null,
+    "download_url": null
   },
   {
     "repo": "git-for-windows/git",
     "save_dir": "soft/编程工具",
     "tagregex": "",
     "assetregex": "-64-bit.zip",
-    "last_version": "untagged-8231769e9b878a01c378",
-    "asset_filename": "MinGit-2.47.3.2-64-bit.zip",
-    "download_url": "https://github.com/git-for-windows/git/releases/download/untagged-8231769e9b878a01c378/MinGit-2.47.3.2-64-bit.zip"
+    "last_version": null,
+    "asset_filename": null,
+    "download_url": null
   }
 ]
