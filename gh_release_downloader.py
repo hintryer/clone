@@ -52,6 +52,7 @@ def get_release_by_tag(releases, pattern=".*", index=0):
         # 1. tag_name 匹配正则
         # 2. prerelease == false（排除预览版）
         path2 = "$[?(@.prerelease == false)]"
+        print(path2)
         releases2 = JSONPath(path2).parse(releases)
         print(releases2)
         path = f"$..[?(@.tag_name =~ /{pattern}/)]"
@@ -188,7 +189,6 @@ def main():
         
 def main2():
     data = get_releases('lalakii/MouseClickTool')
-    print(data)
     # 保存到本地文件（缩进 100% 正确）
     with open("github_api_response.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
