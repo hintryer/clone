@@ -5,9 +5,8 @@ import requests
 from jsonpath import JSONPath
 
 CONFIG_FILE = "config.json"
-INFO_FILE = "data.json"
 
-def load_config(file_path="config.json"):
+def load_config(file_path=CONFIG_FILE):
     if not os.path.exists(file_path):
         return {}
     try:
@@ -239,7 +238,7 @@ def main():
         cfg.update(new_info)
 
     # 保存回文件
-    with open("config.json", "w", encoding="utf-8") as f:
+    with open(CONFIG_FILE, "w", encoding="utf-8") as f:
         json.dump(config_list, f, ensure_ascii=False, indent=2)
         
 if __name__ == "__main__":
