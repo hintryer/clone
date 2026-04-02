@@ -16,17 +16,6 @@ def load_config(file_path="config.json"):
     except (json.JSONDecodeError, ValueError):
         return {}
         
-def get_file_size(url):
-    """
-    获取远程文件大小(MB)，只请求头，不下载内容
-    """
-    try:
-        response = requests.head(url, timeout=10)
-        size_bytes = int(response.headers.get("Content-Length", 0))
-        size_mb = size_bytes / (1024 * 1024)
-        return round(size_mb, 2)
-    except:
-        return 0  # 获取失败则默认允许下载
         
 def get_releases(repo):
     # 请求头（防拦截、兼容 GitHub Actions）
@@ -194,7 +183,7 @@ def check_and_update(cfg, new_info):
     # ========== 核心限制：大于 100MB 不下载 ==========
     MAX_SIZE_MB = 100
     is_file_too_big = filesize > MAX_SIZE_MB
-    print(filesize)
+    
     print(f"当前版本: {old_version} → 最新版本: {last_version}")
     if is_file_too_big:
         print(f"⚠️  文件过大({filesize:.2f}MB)，仅更新版本信息，不下载")
