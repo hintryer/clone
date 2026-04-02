@@ -38,4 +38,8 @@ jobs:
       - name: Commit changes
         uses: EndBug/add-and-commit@v10
         with:
-          message: '更新时间: $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')'
+          message: '更新时间: ${{ env.CURRENT_TIME }}'
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
+        env:
+          CURRENT_TIME: $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')
