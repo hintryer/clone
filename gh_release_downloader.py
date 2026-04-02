@@ -15,7 +15,19 @@ def load_config(file_path="config.json"):
             return json.load(f) or {}
     except (json.JSONDecodeError, ValueError):
         return {}
-
+        
+def get_file_size(url):
+    """
+    获取远程文件大小(MB)，只请求头，不下载内容
+    """
+    try:
+        response = requests.head(url, timeout=10)
+        size_bytes = int(response.headers.get("Content-Length", 0))
+        size_mb = size_bytes / (1024 * 1024)
+        return round(size_mb, 2)
+    except:
+        return 0  # 获取失败则默认允许下载
+        
 def get_releases(repo):
     # 请求头（防拦截、兼容 GitHub Actions）
     HEADERS = {
@@ -160,8 +172,9 @@ def get_updated_info(config):
     }
 
 def check_and_update(cfg, new_info):
-    """
-    检查版本 → 下载 → 成功则删除旧文件 → 写入新文件
+     """
+    检查版本 → 检查文件是否存在 → 检查大小(≤100MB才下载) → 删除旧文件
+    版本相同但文件丢失 = 自动重新下载
     """
     old_version = cfg["last_version"]
     last_version = new_info["last_version"]
@@ -169,9 +182,16 @@ def check_and_update(cfg, new_info):
     asset_filename = new_info["asset_filename"]
     save_dir = new_info["save_dir"]
 
-    print(f"当前版本: {old_version} → 最新版本: {last_version}")
+    # 当前文件路径
     current_file_path = os.path.join(save_dir, asset_filename)
-    
+    # 旧文件路径
+    old_file_path = os.path.join(save_dir, cfg.get("asset_filename", ""))
+
+    print(f"当前版本: {old_version} → 最新版本: {last_version}")
+
+    # ==============================================
+    # 版本相同 → 检查文件是否存在，不存在则重新下载
+    # ==============================================
     if last_version == old_version:
         if os.path.exists(current_file_path):
             print("✅ 已是最新版本，文件正常\n")
@@ -179,25 +199,34 @@ def check_and_update(cfg, new_info):
         else:
             print("⚠️ 版本相同但文件丢失，开始重新下载...")
             dl_ok = download_file(download_url, save_dir, asset_filename)
-            return dl_ok  # 下载成功就算更新成功
+            return dl_ok
 
-    # 开始下载
-    print(f"【更新】{cfg['repo']}")
+    # ==============================================
+    # 版本不同 → 先检查文件大小（大于100MB直接跳过）
+    # ==============================================
+    print(f"【检查更新】{cfg['repo']}")
+    MAX_SIZE_MB = 100  # 限制 100MB
+    file_size_mb = get_file_size(download_url)
+
+    if file_size_mb > MAX_SIZE_MB:
+        print(f"⚠️ 文件过大({file_size_mb:.2f}MB)，超过100MB，跳过下载\n")
+        return False
+
+    # ==============================================
+    # 正常下载更新
+    # ==============================================
     dl_ok = download_file(download_url, save_dir, asset_filename)
 
-    # 下载成功 → 删除旧文件
     if dl_ok:
-        old_file = cfg.get("asset_filename")
-        if old_file and old_file != asset_filename:
-            old_path = os.path.join(save_dir, old_file)
-            if os.path.exists(old_path):
-                os.remove(old_path)
-                print(f"🗑️ 已删除旧文件: {old_file}")
+        # 下载成功 → 删除旧文件
+        if os.path.exists(old_file_path) and old_file_path != current_file_path:
+            os.remove(old_file_path)
+            print("🗑️ 已删除旧文件")
         
         print("✅ 更新成功\n")
         return True
     else:
-        print("❌ 下载失败，不更新\n")
+        print("❌ 下载失败\n")
         return False
         
 def main():
