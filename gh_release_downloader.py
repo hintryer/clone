@@ -206,7 +206,7 @@ def main():
     
     # 2. 遍历每一个配置并更新
     for cfg in config_list:
-        print(f"\n===== 🚀 检查更新：{cfg['repo']} =====")
+        print(f"\n\n=============== 🚀 检查更新：{cfg['repo']} ===============")
         new_info = get_updated_info(cfg)
     
         if not new_info:
@@ -219,12 +219,6 @@ def main():
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config_list, f, ensure_ascii=False, indent=2)
         
-def main2():
-    data = get_releases('git-for-windows/git')
-    # 保存到本地文件（缩进 100% 正确）
-    with open("github_api_response.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-    release = get_release_by_tag(data)
 if __name__ == "__main__":
     main()
     print("✅ 完成")
