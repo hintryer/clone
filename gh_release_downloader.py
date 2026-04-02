@@ -186,7 +186,7 @@ def check_and_update(cfg, new_info):
     download_url = new_info["download_url"]
     asset_filename = new_info["asset_filename"]
     save_dir = new_info["save_dir"]
-    filesize = new_info(filesize)
+    filesize = new_info["filesize"]
     # 文件路径
     current_file_path = os.path.join(save_dir, asset_filename)
     old_file_path = os.path.join(save_dir, cfg.get("asset_filename", ""))
