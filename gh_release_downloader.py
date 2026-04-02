@@ -172,7 +172,7 @@ def get_updated_info(config):
     }
 
 def check_and_update(cfg, new_info):
-     """
+    """
     检查版本 → 检查文件是否存在 → 检查大小(≤100MB才下载) → 删除旧文件
     版本相同但文件丢失 = 自动重新下载
     """
