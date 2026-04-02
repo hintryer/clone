@@ -173,8 +173,9 @@ def get_updated_info(config):
 
 def check_and_update(cfg, new_info):
     """
-    检查版本 → 检查文件是否存在 → 检查大小(≤100MB才下载) → 删除旧文件
+    检查版本 → 检查文件大小(>100MB不下载) → 检查文件是否存在 → 下载/跳过
     版本相同但文件丢失 = 自动重新下载
+    >100MB文件：只更新版本信息，不下载、不占用Git空间
     """
     old_version = cfg["last_version"]
     last_version = new_info["last_version"]
@@ -182,52 +183,53 @@ def check_and_update(cfg, new_info):
     asset_filename = new_info["asset_filename"]
     save_dir = new_info["save_dir"]
 
-    # 当前文件路径
+    # 文件路径
     current_file_path = os.path.join(save_dir, asset_filename)
-    # 旧文件路径
     old_file_path = os.path.join(save_dir, cfg.get("asset_filename", ""))
 
+    # ========== 核心限制：大于 100MB 不下载 ==========
+    MAX_SIZE_MB = 100
+    file_size_mb = get_file_size(download_url)
+    is_file_too_big = file_size_mb > MAX_SIZE_MB
+
     print(f"当前版本: {old_version} → 最新版本: {last_version}")
+    if is_file_too_big:
+        print(f"⚠️  文件过大({file_size_mb:.2f}MB)，仅更新版本信息，不下载")
 
     # ==============================================
-    # 版本相同 → 检查文件是否存在，不存在则重新下载
+    # 版本相同
     # ==============================================
     if last_version == old_version:
-        if os.path.exists(current_file_path):
-            print("✅ 已是最新版本，文件正常\n")
+        if os.path.exists(current_file_path) or is_file_too_big:
+            print("✅ 已是最新版本\n")
             return False
         else:
-            print("⚠️ 版本相同但文件丢失，开始重新下载...")
+            print("⚠️ 文件丢失，重新下载...")
             dl_ok = download_file(download_url, save_dir, asset_filename)
             return dl_ok
 
     # ==============================================
-    # 版本不同 → 先检查文件大小（大于100MB直接跳过）
+    # 版本不同：大文件跳过下载，只更新信息
     # ==============================================
-    print(f"【检查更新】{cfg['repo']}")
-    MAX_SIZE_MB = 100  # 限制 100MB
-    file_size_mb = get_file_size(download_url)
+    dl_ok = True
+    if not is_file_too_big:
+        print(f"【更新】{cfg['repo']}")
+        dl_ok = download_file(download_url, save_dir, asset_filename)
 
-    if file_size_mb > MAX_SIZE_MB:
-        print(f"⚠️ 文件过大({file_size_mb:.2f}MB)，超过100MB，跳过下载\n")
-        return False
-
-    # ==============================================
-    # 正常下载更新
-    # ==============================================
-    dl_ok = download_file(download_url, save_dir, asset_filename)
-
-    if dl_ok:
-        # 下载成功 → 删除旧文件
-        if os.path.exists(old_file_path) and old_file_path != current_file_path:
-            os.remove(old_file_path)
-            print("🗑️ 已删除旧文件")
-        
-        print("✅ 更新成功\n")
-        return True
+        if dl_ok:
+            # 删除旧文件
+            if os.path.exists(old_file_path) and old_file_path != current_file_path:
+                try:
+                    os.remove(old_file_path)
+                    print("🗑️ 已删除旧文件")
+                except:
+                    pass
+            print("✅ 更新成功\n")
     else:
-        print("❌ 下载失败\n")
-        return False
+        # 文件太大，不下载，直接返回成功（只更新配置）
+        print("✅ 版本信息已更新（文件过大未下载）\n")
+
+    return dl_ok
         
 def main():
     # 1. 读取配置
