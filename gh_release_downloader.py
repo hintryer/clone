@@ -160,7 +160,7 @@ def get_updated_info(config):
     asset_filename = get_first_value(target_asset, '$.name')
     download_url = get_first_value(target_asset, '$.browser_download_url')
     filesize = get_first_value(target_asset, '$.size')
-    
+    print(filesize)
     print(f"✅ 获取成功：{repo} → {last_version}") 
     # 返回结构 = 和 config 完全一样！
     return {
