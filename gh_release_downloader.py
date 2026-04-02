@@ -191,7 +191,7 @@ def check_and_update(cfg, new_info):
     MAX_SIZE_MB = 100
     file_size_mb = get_file_size(download_url)
     is_file_too_big = file_size_mb > MAX_SIZE_MB
-
+    print(file_size_mb)
     print(f"当前版本: {old_version} → 最新版本: {last_version}")
     if is_file_too_big:
         print(f"⚠️  文件过大({file_size_mb:.2f}MB)，仅更新版本信息，不下载")
