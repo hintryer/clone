@@ -159,7 +159,8 @@ def get_updated_info(config):
     last_version = get_first_value(release, '$..tag_name')
     asset_filename = get_first_value(target_asset, '$.name')
     download_url = get_first_value(target_asset, '$.browser_download_url')
-    filesize = get_first_value(target_asset, '$.size')
+    filesizebit = get_first_value(target_asset, '$.size')
+    filesize = round(filesizebit / 1024 / 1024, 2)
     print(filesize)
     print(f"✅ 获取成功：{repo} → {last_version}") 
     # 返回结构 = 和 config 完全一样！
@@ -185,19 +186,18 @@ def check_and_update(cfg, new_info):
     download_url = new_info["download_url"]
     asset_filename = new_info["asset_filename"]
     save_dir = new_info["save_dir"]
-
+    filesize = new_info(filesize)
     # 文件路径
     current_file_path = os.path.join(save_dir, asset_filename)
     old_file_path = os.path.join(save_dir, cfg.get("asset_filename", ""))
 
     # ========== 核心限制：大于 100MB 不下载 ==========
     MAX_SIZE_MB = 100
-    file_size_mb = get_file_size(download_url)
-    is_file_too_big = file_size_mb > MAX_SIZE_MB
-    print(file_size_mb)
+    is_file_too_big = filesize > MAX_SIZE_MB
+    print(filesize)
     print(f"当前版本: {old_version} → 最新版本: {last_version}")
     if is_file_too_big:
-        print(f"⚠️  文件过大({file_size_mb:.2f}MB)，仅更新版本信息，不下载")
+        print(f"⚠️  文件过大({filesize:.2f}MB)，仅更新版本信息，不下载")
 
     # ==============================================
     # 版本相同
