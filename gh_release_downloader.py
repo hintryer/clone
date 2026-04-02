@@ -246,8 +246,8 @@ def main():
         if not new_info:
             continue
         # 调用一次 = 全部搞定
-        if check_and_update(cfg, new_info):
-            cfg.update(new_info)
+        check_and_update(cfg, new_info)
+        cfg.update(new_info)
 
     # 保存回文件
     with open("config.json", "w", encoding="utf-8") as f:
