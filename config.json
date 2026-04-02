@@ -109,15 +109,6 @@
     "download_url": "https://github.com/GyanD/codexffmpeg/releases/download/8.1/ffmpeg-8.1-essentials_build.7z"
   },
   {
-    "repo": "GyanD/codexffmpeg",
-    "save_dir": "soft/编程工具",
-    "tagregex": "",
-    "assetregex": "full_build.7z",
-    "last_version": "8.1",
-    "asset_filename": "ffmpeg-8.1-essentials_build.7z",
-    "download_url": "https://github.com/GyanD/codexffmpeg/releases/download/8.1/ffmpeg-8.1-essentials_build.7z"
-  },
-  {
     "repo": "git-for-windows/git",
     "save_dir": "soft/编程工具",
     "tagregex": "",
