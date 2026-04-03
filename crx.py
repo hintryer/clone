@@ -13,17 +13,25 @@ def get_crx_download_url(url):
         # ✅ 提取下载链接（你要的核心）
         download_link = page.get_attribute("a#online", "href")
         version      = page.inner_text("#right-info div:has-text('版本') + div").split()[0]
-        update_date  = page.inner_text("#right-info div:has-text('更新日期') + div").split("\n")[0]
+        update_date = page.locator("#right-info div:has-text('更新日期') + div").text_content().strip()
+        update_date = update_date.split()[0]  # 只保留第一段文字
         download_link = download_link.replace("type=install", "type=dl")
+
+        key = "filename="
+        start = download_link.find(key) + len(key)
+        end = download_link.find("&type=")
+        
+        encoded_name = download_link[start:end]
+        file_name = urllib.parse.unquote(encoded_name).strip()
         
         print("版本:", version)
         print("更新日期:", update_date)
+        print("文件名:", file_name)
         print("下载链接:", download_link)
-        update_date = page.locator("#right-info div:has-text('更新日期') + div").text_content().strip()
-        update_date = update_date.split()[0]  # 只保留第一段文字
-        print("更新日期:", update_date)
+        
         browser.close()
-        return download_link
+        return {"filename": filename, "version": version, "update_date": update_date, "download_link": download_link}
+
 
 # --- 调用 ---
 if __name__ == "__main__":
