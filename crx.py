@@ -41,7 +41,7 @@ def crawl_dynamic_page(url,target_xpath):
 
         # 4. 保存渲染后的HTML（调试用，关键！）
         rendered_html = driver.page_source
-
+        print(rendered_html)
         # 5. 提取所有符合XPATH的元素文字
         target_elems = driver.find_elements(By.XPATH, target_xpath)
         
@@ -73,7 +73,7 @@ def crawl_dynamic_page(url,target_xpath):
 # 调用函数
 if __name__ == "__main__":
     target_url = "https://www.crxsoso.com/webstore/detail/bpoadfkcbjbfhfodiogcnhhhpibjhbnh"
-    target_xpath='//*[@id="about"]'
+    target_xpath='//a[@id="online"]/@href'
     result = crawl_dynamic_page(target_url,target_xpath)
     
     # 输出最终结果
