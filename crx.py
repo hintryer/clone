@@ -1,4 +1,5 @@
 from playwright.sync_api import sync_playwright
+import urllib.parse
 
 def get_crx_download_url(url):
     with sync_playwright() as p:
