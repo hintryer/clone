@@ -23,7 +23,7 @@ def get_crx_download_url(url):
         end = download_link.find("&type=")
         
         encoded_name = download_link[start:end]
-        file_name = urllib.parse.unquote(encoded_name).strip()
+        filename = urllib.parse.unquote(encoded_name).strip()
         
         print("版本:", version)
         print("更新日期:", update_date)
