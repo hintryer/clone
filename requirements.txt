@@ -1,2 +1,4 @@
 requests
 jsonpath-python
+selenium
+webdriver_manager
