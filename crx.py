@@ -27,7 +27,7 @@ def get_crx_download_url(url):
         
         print("版本:", version)
         print("更新日期:", update_date)
-        print("文件名:", file_name)
+        print("文件名:", filename)
         print("下载链接:", download_link)
         
         browser.close()
