@@ -26,13 +26,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # ==========================================
-      # 🔥 在这里加 playwright 安装（关键）
-      # ==========================================
-      - name: 安装 Playwright 浏览器
-        run: |
-          playwright install --with-deps chromium
-
       - name: 执行CRX收集脚本
         run: |
           python crx.py
