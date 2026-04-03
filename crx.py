@@ -61,7 +61,7 @@ def download_file(url, save_dir, filename):
 
 def get_crxupdated_info(config):
     urlid = config["urlid"]
-    save_dir = config.get("save_dir", "CRX")  # 默认保存到 CRX 文件夹
+    save_dir = config["save_dir"]
 
     with sync_playwright() as p:
         browser = p.chromium.launch(
