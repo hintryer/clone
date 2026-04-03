@@ -11,7 +11,13 @@ def get_crx_download_url(url):
         page.wait_for_selector('a#online', timeout=10000)  # 自动等待按钮出现
         
         # ✅ 提取下载链接（你要的核心）
-        download_link = page.get_attribute('a#online', 'href')
+        download_link = page.get_attribute("a#online", "href")
+        version      = page.inner_text("#right-info div:has-text('版本') + div").split()[0]
+        update_date  = page.inner_text("#right-info div:has-text('更新日期') + div").split("\n")[0]
+
+        print("版本:", version)
+        print("更新日期:", update_date)
+        print("下载链接:", download_link)
         
         browser.close()
         return download_link
