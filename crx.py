@@ -14,11 +14,14 @@ def get_crx_download_url(url):
         download_link = page.get_attribute("a#online", "href")
         version      = page.inner_text("#right-info div:has-text('版本') + div").split()[0]
         update_date  = page.inner_text("#right-info div:has-text('更新日期') + div").split("\n")[0]
-
+        download_link = download_link.replace("type=install", "type=dl")
+        
         print("版本:", version)
         print("更新日期:", update_date)
         print("下载链接:", download_link)
-        
+        update_date = page.locator("#right-info div:has-text('更新日期') + div").text_content().strip()
+        update_date = update_date.split()[0]  # 只保留第一段文字
+        print("更新日期:", update_date)
         browser.close()
         return download_link
 
