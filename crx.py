@@ -75,7 +75,7 @@ def crawl_dynamic_page(url,target_xpath):
 # 调用函数
 if __name__ == "__main__":
     target_url = "https://www.crxsoso.com/webstore/detail/bpoadfkcbjbfhfodiogcnhhhpibjhbnh"
-    target_xpath='//a[@id="online"]/@href'
+    target_xpath='//a[@id="online"]/@download'
     result = crawl_dynamic_page(target_url,target_xpath)
     
     # 输出最终结果
