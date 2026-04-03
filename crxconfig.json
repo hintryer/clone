@@ -1,7 +1,17 @@
 [
   {
     "urlid": "jaikcnhlohebodlpkmjepipngegjbfpg",
-    "save_dir": "CRX",
+    "save_dir": "soft/crx",
+    "repo": "超级拖拽",
+    "version": "2.1.2",
+    "filename": "超级拖拽 2.1.2",
+    "update_date": "2023年4月7日",
+    "download_link": "https://c2.crxsoso.com/crx/blobs/AQx-wa6EOsIZXOAKvEaA5BnkWVb74vGvigzryVU2HFp0WWEiJ40LCI7BVQcTehroL3Zkqj21FpMCP_8bgfU5OayQFkXaTdsBe7MOEJZ2aLIp8gNnE5Z5AMZSmuUbt0G3n8Mmk0IZvpm7HkzGfAlwKQ/JAIKCNHLOHEBODLPKMJEPIPNGEGJBFPG_2_1_2_0.crx?ext=crx&filename=%E8%B6%85%E7%BA%A7%E6%8B%96%E6%8B%BD%202.1.2&type=dl",
+    "filesize": 0.0366796875
+  },
+  {
+    "urlid": "infppggnoaenmfagbfknfkancpbljcca",
+    "save_dir": "soft/crx",
     "repo": "超级拖拽",
     "version": "2.1.2",
     "filename": "超级拖拽 2.1.2",
@@ -11,7 +21,7 @@
   },
   {
     "urlid": "mpiodijhokgodhhofbcjdecpffjipkle",
-    "save_dir": "CRX",
+    "save_dir": "soft/crx",
     "repo": "SingleFile",
     "version": "1.22.98",
     "filename": "SingleFile 1.22.98",
@@ -21,7 +31,7 @@
   },
   {
     "urlid": "ddkjiahejlhfcafbddmgiahcphecmpfh",
-    "save_dir": "CRX",
+    "save_dir": "soft/crx",
     "repo": "uBlock Origin Lite",
     "version": "2026.329.1951",
     "filename": "uBlock Origin Lite 2026.329.1951",
@@ -31,7 +41,7 @@
   },
   {
     "urlid": "jhodmcfehicjonjdoljadkbkenaoehfm",
-    "save_dir": "CRX",
+    "save_dir": "soft/crx",
     "repo": "解除网页复制限制",
     "version": "2.1.5",
     "filename": "解除网页复制限制 2.1.5",
@@ -41,7 +51,7 @@
   },
   {
     "urlid": "bpoadfkcbjbfhfodiogcnhhhpibjhbnh",
-    "save_dir": "CRX",
+    "save_dir": "soft/crx",
     "repo": "沉浸式翻译",
     "version": "1.27.2",
     "filename": "沉浸式翻译 - 网页翻译插件 | PDF翻译 | 免费 1.27.2",
@@ -51,7 +61,7 @@
   },
   {
     "urlid": "gcalenpjmijncebpfijmoaglllgpjagf",
-    "save_dir": "CRX",
+    "save_dir": "soft/crx",
     "repo": "篡改猴测试版",
     "version": "5.5.6235",
     "filename": "篡改猴测试版 5.5.6235",
@@ -61,7 +71,7 @@
   },
   {
     "urlid": "hdokiejnpimakedhajhdlcegeplioahd",
-    "save_dir": "CRX",
+    "save_dir": "soft/crx",
     "repo": "LastPass",
     "version": "4.152.0",
     "filename": "LastPass: Free Password Manager 4.152.0",
@@ -71,7 +81,7 @@
   },
   {
     "urlid": "pfnededegaaopdmhkdmcofjmoldfiped",
-    "save_dir": "CRX",
+    "save_dir": "soft/crx",
     "repo": "Proxy SwitchyOmega 3",
     "version": "3.4.5",
     "filename": "Proxy SwitchyOmega 3 (ZeroOmega) 3.4.5",
