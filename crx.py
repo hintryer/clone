@@ -171,7 +171,7 @@ def main():
         return
 
     for cfg in config_list:
-        print(f"\n=============== 🚀 检查更新：{cfg['urlid']} ===============")
+        print(f"\n=============== 🚀 检查更新：{cfg['filename']} ===============")
         try:
             new_info = get_crxupdated_info(cfg)
             check_and_update(cfg, new_info)
