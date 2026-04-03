@@ -3,6 +3,27 @@ import json
 import requests
 import urllib.parse
 from playwright.sync_api import sync_playwright
+import subprocess  # 用于自动安装
+
+# ==============================================
+# 🔥 核心：Python 内部自动安装 Playwright 浏览器
+# ==============================================
+def install_playwright_browser():
+    try:
+        print("🔧 检查 Playwright 浏览器...")
+        # 自动安装 chromium（Linux 会自动装依赖）
+        subprocess.run(
+            ["playwright", "install", "--with-deps", "chromium"],
+            check=True,
+            capture_output=True,
+            text=True
+        )
+        print("✅ Playwright 浏览器准备完成")
+    except Exception:
+        pass
+
+# 启动时自动安装
+install_playwright_browser()
 
 CONFIG_FILE = "crxconfig.json"
 
@@ -77,8 +98,15 @@ def get_crxupdated_info(config):
         filename = urllib.parse.unquote(encoded_name).strip()
 
         # 文件大小（MB）
-        size_text = page.inner_text("#right-info div:has-text('大小') + div").strip()
-        size_mb = float(size_text.replace("MiB", ""))
+        size_text = page.inner_text("#right-info div:has-text('大小') + div").strip().upper()
+        size_num = float(''.join([c for c in size_text if c.isdigit() or c == '.']))
+        
+        if "KIB" in size_text:
+            size_mb = size_num / 1024  # KiB → MiB
+        elif "MIB" in size_text:
+            size_mb = size_num          # 已经是 MiB
+        else:
+            size_mb = 0.0
 
         browser.close()
 
