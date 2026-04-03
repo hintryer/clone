@@ -1,6 +1,5 @@
 name: CRX自动收集
 on:
-  push:
   workflow_dispatch:
   schedule:
     - cron: '0 6 * * *'
