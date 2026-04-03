@@ -3,3 +3,4 @@ jsonpath-python
 selenium
 webdriver_manager
 playwright
+subprocess
