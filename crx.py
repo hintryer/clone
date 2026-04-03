@@ -41,7 +41,9 @@ def crawl_dynamic_page(url,target_xpath):
 
         # 4. 保存渲染后的HTML（调试用，关键！）
         rendered_html = driver.page_source
-        print(rendered_html)
+        with open("rendered_page.html", "w", encoding="utf-8") as f:
+            f.write(rendered_html)
+        print("✅ 渲染后的HTML已保存到：rendered_page.html")
         # 5. 提取所有符合XPATH的元素文字
         target_elems = driver.find_elements(By.XPATH, target_xpath)
         
