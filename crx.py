@@ -95,7 +95,7 @@ def get_crxupdated_info(config):
         start = download_link.find(key) + len(key)
         end = download_link.find("&type=")
         encoded_name = download_link[start:end]
-        filename = urllib.parse.unquote(encoded_name).strip()
+        filename = urllib.parse.unquote(encoded_name).strip() + '.crx'
 
         # 文件大小（MB）
         size_text = page.inner_text("#right-info div:has-text('大小') + div").strip().upper()
