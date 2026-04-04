@@ -4,7 +4,7 @@ import requests
 
 # ==================== 你的原有基础配置 ====================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-CONFIG_FILE = os.path.join(BASE_DIR, "config.json")
+CONFIG_FILE = os.path.join(BASE_DIR, "netconfig.json")
 
 def load_config(file_path=CONFIG_FILE):
     if not os.path.exists(file_path):
