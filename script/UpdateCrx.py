@@ -25,7 +25,8 @@ def install_playwright_browser():
 # 启动时自动安装
 install_playwright_browser()
 
-CONFIG_FILE = "crxconfig.json"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_FILE = os.path.join(BASE_DIR, "crxconfig.json")
 
 def load_config(file_path=CONFIG_FILE):
     if not os.path.exists(file_path):
