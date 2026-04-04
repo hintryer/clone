@@ -1,11 +1,11 @@
-name: Update Software
+name: Auto Update
 on:
   workflow_dispatch:
   schedule:
     - cron: '0 6 * * *'
 
 jobs:
-  Update_Software:
+  AutoUpdate:
     runs-on: ubuntu-latest
     permissions:
       contents: write
