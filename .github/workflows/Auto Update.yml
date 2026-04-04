@@ -31,6 +31,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python script/UpdateGithub.py
+          python script/UpdateNet.py
           python script/UpdateCrx.py
           
       - name: Get time
