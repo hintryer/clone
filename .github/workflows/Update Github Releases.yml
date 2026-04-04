@@ -30,8 +30,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python gh_release_downloader.py
-          python script/crx.py
+          python script/UpdateGithub.py
+          python script/UpdateCrx.py
           
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v10
