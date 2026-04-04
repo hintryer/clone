@@ -33,7 +33,10 @@ jobs:
           python script/UpdateGithub.py
           python script/UpdateCrx.py
           
-      - name: Commit and push changes
+      - name: Get time
+        run: echo "NOW=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+
+      - name: Commit and push
         uses: EndBug/add-and-commit@v10
         with:
-          message: "Update ${{ github.event.head_commit.timestamp }}"
+          message: "Update ${{ env.NOW }}"
