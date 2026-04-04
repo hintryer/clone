@@ -4,7 +4,8 @@ import json
 import requests
 from jsonpath import JSONPath
 
-CONFIG_FILE = "config.json"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_FILE = os.path.join(BASE_DIR, "config.json")
 
 def load_config(file_path=CONFIG_FILE):
     if not os.path.exists(file_path):
