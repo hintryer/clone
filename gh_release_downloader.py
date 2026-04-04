@@ -228,7 +228,7 @@ def main():
     
     # 2. 遍历每一个配置并更新
     for cfg in config_list:
-        print(f"\n\n=============== 🚀 检查更新：{cfg['repo']} ===============")
+        print(f"\n=============== 🚀 检查更新：{cfg['repo']} ===============")
         new_info = get_updated_info(cfg)
     
         if not new_info:
