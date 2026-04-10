@@ -33,6 +33,7 @@ jobs:
           python script/UpdateGithub.py
           python script/UpdateNet.py
           python script/UpdateCrx.py
+          python script/UpdateSoft.py
           
       - name: Get time
         run: echo "NOW=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
