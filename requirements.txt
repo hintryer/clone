@@ -1,3 +1,4 @@
 requests
 jsonpath-python
 playwright
+beautifulsoup4
