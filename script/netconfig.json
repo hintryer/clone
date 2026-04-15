@@ -2,28 +2,28 @@
   {
     "channel": "10.0",
     "save_dir": "soft/dotnet",
-    "last_version": "10.0.5",
-    "asset_filename": "dotnet-runtime-10.0.5-win-x64.exe",
+    "last_version": "10.0.6",
+    "asset_filename": "dotnet-runtime-10.0.6-win-x64.exe",
     "repo": ".NET Runtime 10.0",
-    "download_url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.5/dotnet-runtime-10.0.5-win-x64.exe",
+    "download_url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.6/dotnet-runtime-10.0.6-win-x64.exe",
     "filesize": 0
   },
   {
     "channel": "9.0",
     "save_dir": "soft/dotnet",
-    "last_version": "9.0.14",
-    "asset_filename": "dotnet-runtime-9.0.14-win-x64.exe",
+    "last_version": "9.0.15",
+    "asset_filename": "dotnet-runtime-9.0.15-win-x64.exe",
     "repo": ".NET Runtime 9.0",
-    "download_url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/9.0.14/dotnet-runtime-9.0.14-win-x64.exe",
+    "download_url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/9.0.15/dotnet-runtime-9.0.15-win-x64.exe",
     "filesize": 0
   },
   {
     "channel": "8.0",
     "save_dir": "soft/dotnet",
-    "last_version": "8.0.25",
-    "asset_filename": "dotnet-runtime-8.0.25-win-x64.exe",
+    "last_version": "8.0.26",
+    "asset_filename": "dotnet-runtime-8.0.26-win-x64.exe",
     "repo": ".NET Runtime 8.0",
-    "download_url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/8.0.25/dotnet-runtime-8.0.25-win-x64.exe",
+    "download_url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/8.0.26/dotnet-runtime-8.0.26-win-x64.exe",
     "filesize": 0
   },
   {

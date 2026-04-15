@@ -134,9 +134,9 @@
     "save_dir": "soft/编程工具",
     "tagregex": "",
     "assetregex": "PortableGit.*64-bit",
-    "last_version": "v2.53.0.windows.2",
-    "asset_filename": "PortableGit-2.53.0.2-64-bit.7z.exe",
-    "filesize": 55.56,
-    "download_url": "https://github.com/git-for-windows/git/releases/download/v2.53.0.windows.2/PortableGit-2.53.0.2-64-bit.7z.exe"
+    "last_version": "v2.53.0.windows.3",
+    "asset_filename": "PortableGit-2.53.0.3-64-bit.7z.exe",
+    "filesize": 55.57,
+    "download_url": "https://github.com/git-for-windows/git/releases/download/v2.53.0.windows.3/PortableGit-2.53.0.3-64-bit.7z.exe"
   }
 ]
