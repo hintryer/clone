@@ -18,3 +18,7 @@ jobs:
           tag_name: 'V1.0'
           files: |
             soft/**/*
+      - uses: actions/upload-artifact@v7
+        with:
+          name: my-artifact
+          path: soft/
