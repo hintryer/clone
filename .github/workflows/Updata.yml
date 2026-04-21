@@ -11,7 +11,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-
+      # 👇 修复文件名：把冒号替换成 -
+      - name: Fix invalid filenames
+        run: |
+          find . -name "*:*" -type f | while read f; do
+            mv "$f" "${f//:/-}"
+          done
+          ls -la
       - name: Create Release
         uses: softprops/action-gh-release@v3
         with:
