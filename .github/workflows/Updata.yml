@@ -17,4 +17,4 @@ jobs:
         with:
           tag_name: 'V1.0'
           files: |
-            soft/**/*
+            /soft/**/*
