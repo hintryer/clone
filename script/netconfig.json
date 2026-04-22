@@ -2,10 +2,10 @@
   {
     "channel": "10.0",
     "save_dir": "soft/dotnet",
-    "last_version": "10.0.6",
-    "asset_filename": "dotnet-runtime-10.0.6-win-x64.exe",
+    "last_version": "10.0.7",
+    "asset_filename": "dotnet-runtime-10.0.7-win-x64.exe",
     "repo": ".NET Runtime 10.0",
-    "download_url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.6/dotnet-runtime-10.0.6-win-x64.exe",
+    "download_url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.7/dotnet-runtime-10.0.7-win-x64.exe",
     "filesize": 0
   },
   {
